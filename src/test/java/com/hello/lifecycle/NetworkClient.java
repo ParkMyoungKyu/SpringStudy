@@ -1,9 +1,7 @@
 package com.hello.lifecycle;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient{
     private String url;
 
     public NetworkClient(){
@@ -28,18 +26,16 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("close : " + url);
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        // InitializingBean > afterPropertiesSet() > 초기화 콜백
-        System.out.println("InitializingBean.afterPropertiesSet");
+    public void init() throws Exception {
+        // 초기화 콜백
+        System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
 
-    @Override
-    public void destroy() throws Exception {
-        // DisposableBean > destroy() > 소멸전 콜백
-        System.out.println("DisposableBean.destroy");
+    public void close() throws Exception {
+        // 소멸전 콜백
+        System.out.println("NetworkClient.close");
         disconnect();
     }
 }
