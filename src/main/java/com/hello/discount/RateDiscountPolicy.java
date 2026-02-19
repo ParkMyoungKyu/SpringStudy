@@ -2,11 +2,12 @@ package com.hello.discount;
 
 import com.hello.member.Grade;
 import com.hello.member.Member;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
+@Qualifier("subDiscountPolicy")
 public class RateDiscountPolicy implements DiscountPolicy{
-
     private int discountRate = 10;
 
     @Override
